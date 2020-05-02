@@ -18,6 +18,7 @@ namespace Deveducation
         {
             driver = new ChromeDriver("C:\\SERA\\PHOTO");
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
 

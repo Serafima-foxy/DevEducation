@@ -12,60 +12,66 @@ namespace Deveducation
     public class ContactsPageTest : BaseDriver
     {
         ContactsPageModel contactsModel;
-        public ContactsPageTest()
-        {
-            contactsModel = new ContactsPageModel();
-        }
 
         [Test]
         public void CheckOurContactsLabel()
         {
+            contactsModel = new ContactsPageModel(driver);
             driver.Url = Urls.contactsPage;
-            IWebElement contactsLabel = driver.FindElement(By.TagName(contactsModel.ourContactsLabelTagName));
-            string actResult = contactsLabel.Text;
-            Assert.AreEqual("Наши контакты", actResult);
+            string actRes = contactsModel.FindContactsMainLabel().
+                                          GetMainLabelText();
+
+            Assert.AreEqual("Наши контакты", actRes);
         }
 
         [Test]
         public void CheckDniproAdress()
         {
+            contactsModel = new ContactsPageModel(driver);
             driver.Url = Urls.contactsPage;
-            IWebElement dniproButton = driver.FindElement(By.XPath(contactsModel.contactsDniproCityXPath));
-            dniproButton.Click();
-            IWebElement dniproAdress = driver.FindElement(By.XPath(contactsModel.contactsDniproAdressXPath));
-            string actResult = dniproAdress.Text;
-            Assert.AreEqual("ул.Симферопольская, 17", actResult);
+            string actRes = contactsModel.FindDniproCityButton().
+                                          ClickOnDniproCityButton().
+                                          FindDniproAddress().
+                                          GetTextFromDniproAddressBlock();
+
+            Assert.AreEqual("ул.Симферопольская, 17", actRes);
         }
 
         [Test]
         public void CheckKyivAdress()
         {
+            contactsModel = new ContactsPageModel(driver);
             driver.Url = Urls.contactsPage;
-            IWebElement kyivButton = driver.FindElement(By.XPath(contactsModel.contactsKyivCityXPath));
-            kyivButton.Click();
-            IWebElement kyivAdress = driver.FindElement(By.XPath(contactsModel.contactsKyivAdressXPath));
-            string actResult = kyivAdress.Text;
-            Assert.AreEqual("ст. метро Васильковская, ул. Сумская,1", actResult);
+            string actRes = contactsModel.FindKyivCityButton().
+                                          ClickOnKyivCityButton().
+                                          FindKyivAddress().
+                                          GetTextFromKyivAddressBlock();
+
+            Assert.AreEqual("ст. метро Васильковская, ул. Сумская,1", actRes);
         }
 
         [Test]
         public void CheckKharkivAdress()
         {
+            contactsModel = new ContactsPageModel(driver);
             driver.Url = Urls.contactsPage;
-            IWebElement kharkivButton = driver.FindElement(By.XPath(contactsModel.contactsKharkivCityXPath));
-            kharkivButton.Click();
-            IWebElement kharkivAdress = driver.FindElement(By.XPath(contactsModel.contactsKharkivAdressXPath));
-            string actResult = kharkivAdress.Text;
-            Assert.AreEqual("ул. Донец Захаржевского, 2,\r\nздание Сбербанка, этаж 5", actResult);
+            string actRes = contactsModel.FindKharkivCityButton().
+                                          ClickOnKharkivCityButton().
+                                          FindKharkivAddress().
+                                          GetTextFromKharkivAddressBlock();
+
+            Assert.AreEqual("ул. Донец Захаржевского, 2,\r\nздание Сбербанка, этаж 5", actRes);
         }
 
         [Test]
         public void CheckAskQuestionButton()
         {
+            contactsModel = new ContactsPageModel(driver);
             driver.Url = Urls.contactsPage;
-            IWebElement askQuestionButton = driver.FindElement(By.XPath(contactsModel.contactsAskQuestionButtonXPath));
-            string actResult = askQuestionButton.Text;
-            Assert.AreEqual("ЗАДАТЬ ВОПРОС", actResult);
+            string actRes = contactsModel.FindAskQuationButton().
+                                          GetTextFromAskQuationButton();
+
+            Assert.AreEqual("ЗАДАТЬ ВОПРОС", actRes);
         }
 
 

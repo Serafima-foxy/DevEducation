@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace Deveducation.POM
 {
-    public class QACoursePageModel
+    public class InspirerPageModel
     {
-        public By qaLabel = By.TagName("h1");
+        public By inspirerLabel = By.TagName("h1");
 
         private IWebDriver _driver;
-        IWebElement qaCourseslabelElement;
+        IWebElement inspirerElement;
 
-        public QACoursePageModel(IWebDriver driver)
+        public InspirerPageModel(IWebDriver driver)
         {
             this._driver = driver;
         }
 
-        public QACoursePageModel FindQACoursesLabel()
+        public InspirerPageModel FindInspirerLabel()
         {
-            qaCourseslabelElement = _driver.FindElement(qaLabel);
+            inspirerElement = _driver.FindElement(inspirerLabel);
             return this;
         }
         public string GetTextFromLabel()
         {
-            return qaCourseslabelElement.Text;
+            return inspirerElement.Text;
         }
     }
 }

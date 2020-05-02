@@ -13,161 +13,166 @@ namespace Deveducation
     public class MainPageTest : BaseDriver
     {
         MainPageModel pageModel;
-        CoursesPageModel coursesModel;
-        KyivLocationPageModel kyivLocationModel;
-        PrivacyPolicyPageModel privacyPolicyModel;
-        SignUpButtonFormModel signUpButtonModel;
-        ContactsPageModel contactsModel;
-        GraduatesPageModel graduatesModel;
-        AboutUsPageModel aboutUsModel;
-        public MainPageTest()
-        {
-            pageModel = new MainPageModel();
-            coursesModel = new CoursesPageModel();
-            kyivLocationModel = new KyivLocationPageModel();
-            privacyPolicyModel = new PrivacyPolicyPageModel();
-            signUpButtonModel = new SignUpButtonFormModel();
-            contactsModel = new ContactsPageModel();
-            graduatesModel = new GraduatesPageModel();
-            aboutUsModel = new AboutUsPageModel();
-        }
 
         [Test]
         public void CheckMainLabel()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement mainLabel = driver.FindElement(By.TagName(pageModel.mainLabelTagName));
-            string actResult = mainLabel.Text;
-            Assert.AreEqual("Международный IT-колледж", actResult);
+            pageModel.FindMainLabel();
+            Assert.AreEqual("Международный IT-колледж", pageModel.GetTextFromMainLabel());
         }
 
         [Test]
         public void CheckCoursesButton()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement coursesButton = driver.FindElement(By.XPath(pageModel.courseMenuButtonXPath));
-            coursesButton.Click();
-            IWebElement ourCoursesLabel = driver.FindElement(By.TagName(coursesModel.ourCoursesLabelTagName));
-            string actResult = ourCoursesLabel.Text;
-            Assert.AreEqual("Наши курсы", actResult);
+            string actRes = pageModel.FindCourseMenuButton().
+                                     ClickOnCourseButton().
+                                     FindCoursesLabel().
+                                     GetTextFromMainLabel();
+
+            Assert.AreEqual("Наши курсы", actRes);
         }
+
         [Test]
         public void CheckGraduatesButton()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement graduatesButton = driver.FindElement(By.XPath(pageModel.graduatesMenuButtonXpath));
-            graduatesButton.Click();
-            IWebElement gradualesLabel = driver.FindElement(By.TagName(graduatesModel.graduatesLabelTagName));
-            string actResult = gradualesLabel.Text;
-            Assert.AreEqual("Наши выпускники", actResult);
+            string actRes = pageModel.FindGraduatesMenuBattton().
+                                      ClickOnGraduateButton().
+                                      FindGraduatesLabel().
+                                      GetTextFromMainLabel();
+
+            Assert.AreEqual("Наши выпускники", actRes);
         }
 
         [Test]
         public void CheckAboutUsButton()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement aboutUsButton = driver.FindElement(By.XPath(pageModel.aboutMenuButtonXPath));
-            aboutUsButton.Click();
-            IWebElement aoutUsLabel = driver.FindElement(By.TagName(aboutUsModel.aboutUsLabelTagName));
-            string actResult = aoutUsLabel.Text;
-            Assert.AreEqual("О нас", actResult);
+            string actRes = pageModel.FindAboutUsMenuBatton().
+                                      ClickOnAboutUsButton().
+                                      FindAboutUsMainLabel().
+                                      GetTextFromMainLabel();
+
+            Assert.AreEqual("О нас", actRes);
         }
 
         [Test]
         public void CheckKyivLocation()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement locationKyivButton = driver.FindElement(By.XPath(pageModel.locationKyivButtonXPath));
-            locationKyivButton.Click();
-            IWebElement locationKyivLabel = driver.FindElement(By.XPath(kyivLocationModel.locationKyivLabelXPath));
-            string actResult = locationKyivLabel.Text;
-            Assert.AreEqual("Киев", actResult);
+            string actRes = pageModel.FindKyivLocationElement().
+                                      ClickOnKyivLocationButton().
+                                      FindKyivLocationLabel().
+                                      GetMainLabelText();
+
+            Assert.AreEqual("Киев", actRes);
         }
 
         [Test]
         public void CheckClicableMap()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
-            IWebElement kharkivButton = driver.FindElement(By.XPath(pageModel.clicableMapKharkivXPath));
-            kharkivButton.Click();
-            IWebElement locationKharkivLabel = driver.FindElement(By.XPath(pageModel.kharkivLocationLabelXPath));
-            string actResult = locationKharkivLabel.Text;
-            Assert.AreEqual("Харьков", actResult);
+            string actRes = pageModel.FindOnMapKharkivButton().
+                                      ClickOnMapOnKharkivButton().
+                                      FindKharkivLocationLabel().
+                                      GetMainLabelText();
+            
+            Assert.AreEqual("Харьков", actRes);
         }
 
         [Test]
         public void CheckContactsButton()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement contactsButton = driver.FindElement(By.XPath(pageModel.contactsMenuButtonXPath));
-            contactsButton.Click();
-            IWebElement ourContactsLabel = driver.FindElement(By.TagName(contactsModel.ourContactsLabelTagName));
-            string actResult = ourContactsLabel.Text;
-            Assert.AreEqual("Наши контакты", actResult);
+            string actRes = pageModel.FindContactsMenuBatton().
+                                      ClickOnContactsButton().
+                                      FindContactsMainLabel().
+                                      GetMainLabelText();
+
+            Assert.AreEqual("Наши контакты", actRes);
         }
 
         [Test]
         public void CheckLanguageButton()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement languageButton = driver.FindElement(By.ClassName(pageModel.selectLanguageButtonClassName));
-            string actResult = languageButton.Text;
-            Assert.AreEqual("RU", actResult);
+            string actRes = pageModel.FindLanguageButton().
+                                      GetTextFromLanguageButton();
+
+            Assert.AreEqual("RU", actRes);
         }
 
         [Test]
         public void CheckChangeLanguageButton()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement languageButton = driver.FindElement(By.ClassName(pageModel.selectLanguageButtonClassName));
-            languageButton.Click();
-            IWebElement engLanguage = driver.FindElement(By.XPath(pageModel.englishLanguageButtonXPath));
-            engLanguage.Click();
-            IWebElement mainLabelInEnglish = driver.FindElement(By.TagName(pageModel.mainLabelInEnglishTagName));
-            string actRes = mainLabelInEnglish.Text;
+            string actRes = pageModel.FindLanguageButton().
+                                      ClickOnLanguageButton().
+                                      FindEnglishLanguageButton().
+                                      ClickOnEnglishLanguageButton().
+                                      FindMainLabelInEnglish().
+                                      GetMainLabelText();
+
             Assert.AreEqual("International IT College", actRes);
         }
 
         [Test]
         public void CheckPrivacyPolicy()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement privacyPolicyRef = driver.FindElement(By.ClassName(pageModel.privacyPolicyRefClassName));
-            privacyPolicyRef.Click();
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(3);
-            IWebElement privacyPolicyLabel = driver.FindElement(By.TagName(privacyPolicyModel.privacyPolicyLabelTagName));
-            string actResult = privacyPolicyLabel.Text;
-            Assert.AreEqual("Политика конфиденциальности", actResult);
+            string actRes = pageModel.FindPrivacyPolicyRef().
+                                      ClickOnPrivacyPolicyRef().
+                                      FindMainLabel().
+                                      GetTextFromLabel();
+
+            Assert.AreEqual("Политика конфиденциальности", actRes);
         }
 
         [Test]
         public void CheckSignUpForCourseButtonAvailability()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement signUpButton = driver.FindElement(By.XPath(pageModel.signUpForCourseButtonXPath));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            string actResult = signUpButton.Text;
-            Assert.AreEqual("Записаться\r\nна курс", actResult);
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
+            string actRes = pageModel.FindSignUpButton().
+                                      GetTextFromSignUpButton();
+
+            Assert.AreEqual("Записаться\r\nна курс", actRes);
         }
 
         [Test]
         public void CheckFAQLink()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement faqLink = driver.FindElement(By.XPath(pageModel.FAQLinkXPath));
-            faqLink.Click();
-            IWebElement faqLabel = driver.FindElement(By.TagName(pageModel.FAQLabelTafName));
-            string actRes = faqLabel.Text;
+            string actRes = pageModel.FindFaqButton().
+                                      ClickOnFaqButton().
+                                      FindMainLabel().
+                                      GetTextFromLabel();
+
             Assert.AreEqual("FAQ", actRes);
         }
 
         [Test]
         public void CheckFooterYear()
         {
+            pageModel = new MainPageModel(driver);
             driver.Url = Urls.mainPage;
-            IWebElement yearFooter = driver.FindElement(By.ClassName(pageModel.footerYearClassName));
-            string actRes = yearFooter.Text;
+            string actRes = pageModel.FindYearInFooter().
+                                      GetYearFromFooter();
+
             Assert.AreEqual("2020", actRes);
         }
 

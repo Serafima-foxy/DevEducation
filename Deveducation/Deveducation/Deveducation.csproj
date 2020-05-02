@@ -61,7 +61,10 @@
     <Compile Include="POM\BookkeepingPageModel.cs" />
     <Compile Include="POM\ContactsPageModel.cs" />
     <Compile Include="POM\CoursesPageModel.cs" />
+    <Compile Include="POM\FAQPageModel.cs" />
     <Compile Include="POM\GraduatesPageModel.cs" />
+    <Compile Include="POM\InspirerPageModel.cs" />
+    <Compile Include="POM\KharkivLocationPageModel.cs" />
     <Compile Include="POM\KyivLocationPageModel.cs" />
     <Compile Include="POM\MainPageModel.cs" />
     <Compile Include="POM\PrivacyPolicyPageModel.cs" />

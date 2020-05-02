@@ -13,51 +13,53 @@ namespace Deveducation
     public class AboutUsPageTest : BaseDriver
     {
         AboutUsPageModel aboutUsModel;
-        MainPageModel pageModel;
-
-        public AboutUsPageTest()
-        {
-            aboutUsModel = new AboutUsPageModel();
-            pageModel = new MainPageModel();
-        }
 
         [Test]
         public void CheckAboutUsLabel()
         {
+            aboutUsModel = new AboutUsPageModel(driver);
             driver.Url = Urls.aboutUsPage;
-            IWebElement aboutUsLebel = driver.FindElement(By.TagName(aboutUsModel.aboutUsLabelTagName));
-            string actRes = aboutUsLebel.Text;
+            string actRes = aboutUsModel.FindAboutUsMainLabel().
+                                         GetTextFromMainLabel();
+
             Assert.AreEqual("О нас", actRes);
         }
+
         [Test]
         public void CheckGoToMainPageButton()
         {
+            aboutUsModel = new AboutUsPageModel(driver);
             driver.Url = Urls.aboutUsPage;
-            IWebElement mainPageButton = driver.FindElement(By.ClassName(aboutUsModel.mainPageButtonClassName));
-            mainPageButton.Click();
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
-            IWebElement mainPageLabel = driver.FindElement(By.TagName(pageModel.mainLabelTagName));
-            string actRes = mainPageLabel.Text;
+            //driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
+            string actRes = aboutUsModel.FindMainPageButton().
+                                         ClickMainPageButton().
+                                         FindMainLabel().
+                                         GetTextFromMainLabel();
+
             Assert.AreEqual("Международный IT-колледж", actRes);
         }
 
         [Test]
         public void CheckAlexeyInOurTeachersBlock()
         {
+            aboutUsModel = new AboutUsPageModel(driver);
             driver.Url = Urls.aboutUsPage;
-            IWebElement ourTeacher = driver.FindElement(By.XPath(aboutUsModel.aboutUsTeacherAlexeyXPath));
-            string actRes = ourTeacher.Text;
+            string actRes = aboutUsModel.FindOurTeacherAlexey().
+                                         GetTextFromBlock();
+
             Assert.AreEqual("Алексей", actRes);
         }
 
         [Test]
         public void CheckInspirer()
         {
+            aboutUsModel = new AboutUsPageModel(driver);
             driver.Url = Urls.aboutUsPage;
-            IWebElement buttonReadMore = driver.FindElement(By.XPath(aboutUsModel.readMoreButtonXPath));
-            buttonReadMore.Click();
-            IWebElement findInspirer = driver.FindElement(By.TagName(aboutUsModel.inspirerLabelTagName));
-            string actRes = findInspirer.Text;
+            string actRes = aboutUsModel.FindReadMoreButton().
+                                         ClickOnReadMoreButton().
+                                         FindInspirerLabel().
+                                         GetTextFromLabel();
+
             Assert.AreEqual("Вдохновитель", actRes);
         }
     }
